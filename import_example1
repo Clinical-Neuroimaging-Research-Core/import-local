@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "Enter subject ID: "
+read subject
+
+echo "Enter session: "
+read session
+
+study="XXXXX" #enter study name
+
+if [ -d "sub-${subject}" ]; then
+    echo "Directory exists...making session directory!"
+    cd /Volumes/Golgi/$study/sourcedata/sub-${subject}
+    cp -R /Volumes/$subject/DICOM /Volumes/Golgi/$study/sourcedata/sub-${subject}/ses-${session}
+else
+    echo "Directory missing...making subject directory!"
+    mkdir /Volumes/Golgi/$study/sourcedata/sub-${subject}
+    cd /Volumes/Golgi/$study/sourcedata/sub-${subject}
+    echo "Making session directory!"
+   cp -R /Volumes/$subject/DICOM /Volumes/Golgi/$study/sourcedata/sub-${subject}/ses-${session}
+fi
